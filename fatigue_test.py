@@ -1,5 +1,6 @@
 import time
 import random
+import json
 import chart
 
 coordinates = []
@@ -102,7 +103,7 @@ def fatigue_test():
     else:
         print("You are alert and ready to study!")
 
-    chart.user_chart()
+    chart.user_chart(coordinates)
 
 if __name__ == "__main__":
     fatigue_test()
