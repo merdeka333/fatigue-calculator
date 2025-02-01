@@ -1,6 +1,8 @@
 import time
 import random
 
+coordinates = []
+
 def ask_question(question, correct_answer, answer_type=str, time_limit=5):
     """
     Ask a question, check the response time, and return whether the answer is correct along with the response time.
@@ -15,7 +17,18 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
     except ValueError:
         correct = False
 
-    return correct, response_time
+    "Assign integer values to true and false to be able to graph"
+
+    if correct == True:
+        correctNum = 1
+    else:
+        correctNum = 2
+   
+    "Adds the response time and if they answered correctly or not to a tuple to store coordinates. Tuple is then stored in list"
+    point = (response_time, correctNum)
+    coordinates.append(point)
+
+    return correct, response_time  
 
 def fatigue_test():
     print("\nWelcome to the Fatigue Calculator! Let's determine your alertness level.\n")
