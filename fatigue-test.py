@@ -1,5 +1,6 @@
 import time
 import random
+import chart
 
 coordinates = []
 
@@ -100,6 +101,8 @@ def fatigue_test():
         print("You are moderately tired. Take a break soon.")
     else:
         print("You are alert and ready to study!")
+
+    chart.user_chart()
 
 if __name__ == "__main__":
     fatigue_test()
