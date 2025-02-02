@@ -2,6 +2,8 @@ import time
 import random
 import json
 import chart
+import sys
+import select
 
 coordinates = []
 
@@ -108,6 +110,11 @@ def fatigue_test(): # Driver code
         time.sleep(3)
         print("Let's test your reaction speed.")
         print("When you see 'GO!', press Enter as fast as you can.")
+
+        # Clear any premature input before the reaction test starts
+        if select.select([sys.stdin], [], [], 0)[0]:
+            sys.stdin.read(1)  # Consume the premature input
+
         time.sleep(random.randint(2, 5))  # Random delay before showing GO!
         print("GO!")
         start_reaction = time.time()
