@@ -13,15 +13,16 @@ def load_coordinates():
     except (FileNotFoundError, json.JSONDecodeError):
         return []  # Return empty list if file doesn't exist or is corrupted
 
+def save_coordinates(coordinates):
+    """Save updated coordinates to a file."""
+    with open(DATA_FILE, "w") as file:
+        json.dump(coordinates, file)
+
 def plot_chart(coordinates):
     if not coordinates:
         print("No data to plot. Please complete the fatigue test first.")
         return
 
-def save_coordinates(coordinates):
-        """Save updated coordinates to a file."""
-    with open(DATA_FILE, "w") as file:
-        json.dump(coordinates, file)
 
     xValue, yValue = zip(*coordinates)  # Unpacking the coordinates
 
@@ -40,7 +41,7 @@ def save_coordinates(coordinates):
         # Updating the data by adding more points
         x = np.array(xValue[:frame + 1])
         y = np.array(yValue[:frame + 1])
-        scatter.set_offsets(list(zip(xValue[:frame + 1], yValue[:frame + 1])))  # Update data points
+        scatter.set_offsets(np.column_stack((x, y)))
         return scatter,
 
     anim = FuncAnimation(fig, update, frames=len(coordinates), interval=500, repeat=False)  # Smooth animation
