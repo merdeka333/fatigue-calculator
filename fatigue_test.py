@@ -69,7 +69,7 @@ def fatigue_test(): # Driver code
     # Question bank
     question_bank = [
         ("What is 17 + 15?", 32, int),
-        ("What is 41 + 25", 66, int),
+        ("What is 41 + 25?", 66, int),
         ("What comes next in the sequence: 3, 6, 9, __?", 12, int),
         ("What comes next in the sequence: 11, 22, 33, __?", 44, int),
         ("What comes next in the sequence: 2, 4, 8, __?", 16, int),
@@ -110,10 +110,6 @@ def fatigue_test(): # Driver code
         time.sleep(3)
         print("Let's test your reaction speed.")
         print("When you see 'GO!', press Enter as fast as you can.")
-
-        # Clear any premature input before the reaction test starts
-        if select.select([sys.stdin], [], [], 0)[0]:
-            sys.stdin.read(1)  # Consume the premature input
 
         time.sleep(random.randint(2, 5))  # Random delay before showing GO!
         print("GO!")
