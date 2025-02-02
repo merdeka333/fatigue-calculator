@@ -22,8 +22,8 @@ def save_coordinates(coordinates):
 plt.ion()
 fig, ax = plt.subplots()
 ax.set_title("Fatigue Data")
-ax.set_xlabel("Response Time")
-ax.set_ylabel("Correctness (1: correct, 2: incorrect)")
+ax.set_xlabel("Current Time of Day")
+ax.set_ylabel("Overall Fatigue Score")
 scatter = ax.scatter([], [], s=50, c='b', alpha=0.5)
 
 def plot_chart(coordinates):
@@ -34,8 +34,9 @@ def plot_chart(coordinates):
     xValue, yValue = zip(*coordinates)  # Unpacking the coordinates
 
     # Creating the figure and axes object
-    ax.set_xlim(min(xValue) - 1, max(xValue) + 1)  # Expand x-axis range slightly
+    ax.set_xlim(0,24)  # Set range from 0-24 hrs
     ax.set_ylim(0, max(yValue) + 1)  # Adjust y-axis range based on scores
+    ax.set_xticks(np.arange(0, 25, 1)) # One tick for every hour
 
     scatter.set_offsets(np.column_stack((xValue, yValue)))  # Update points
     plt.draw()  # Redraw the figure

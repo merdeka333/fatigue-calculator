@@ -4,6 +4,7 @@ import json
 import chart
 import sys
 import select
+import datetime
 
 coordinates = []
 
@@ -138,8 +139,19 @@ def fatigue_test(): # Driver code
     else:
         print("You are alert and ready to study!")
 
-    timestamp = time.time()
-    fatigue_point = (timestamp, score)  # Save timestamp and total score as a point
+
+
+    current_time = time.localtime()
+
+    hours = current_time.tm_hour
+    minutes = current_time.tm_min
+    decimal_time = hours + (minutes / 60)
+
+    # Print the result
+    print(f"Current time in decimal: {decimal_time:.2f}")
+
+
+    fatigue_point = (decimal_time, score)  # Save timestamp and total score as a point
     coordinates.append(fatigue_point)
 
     chart.update_fatigue_chart(coordinates)  # Update chart with new data
