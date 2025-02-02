@@ -30,16 +30,16 @@ def plot_chart(coordinates):
         print("No data to plot. Please complete the fatigue test first.")
         return
 
-
     xValue, yValue = zip(*coordinates)  # Unpacking the coordinates
 
     # Creating the figure and axes object
-    ax.set_xlim(0, max(xValue) + 1)
-    ax.set_ylim(0.5, 2.5)
+    ax.set_xlim(min(xValue) - 1, max(xValue) + 1)  # Expand x-axis range slightly
+    ax.set_ylim(0, max(yValue) + 1)  # Adjust y-axis range based on scores
 
     scatter.set_offsets(np.column_stack((xValue, yValue)))  # Update points
     plt.draw()  # Redraw the figure
     plt.pause(0.1)
+
 
 def update_fatigue_chart(new_data):
     """Add new fatigue test data and update the chart."""

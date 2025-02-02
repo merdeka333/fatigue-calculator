@@ -32,12 +32,12 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
         correctNum = 1
     else:
         correctNum = 2
-   
+
     "Adds the response time and if they answered correctly or not to a tuple to store coordinates. Tuple is then stored in list"
     point = (response_time, correctNum)
     coordinates.append(point)
 
-    return correct, response_time  
+    return correct, response_time
 
 def fatigue_test(): # Driver code
     # Explain the program to the user
@@ -142,7 +142,11 @@ def fatigue_test(): # Driver code
     else:
         print("You are alert and ready to study!")
 
-    chart.update_fatigue_chart(coordinates)
+    timestamp = time.time()
+    fatigue_point = (timestamp, score)  # Save timestamp and total score as a point
+    coordinates.append(fatigue_point)
+
+    chart.update_fatigue_chart(coordinates)  # Update chart with new data
 
 
 if __name__ == "__main__":
