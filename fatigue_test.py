@@ -20,7 +20,7 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
         else:
             response = answer_type(response) # Convert input to specified type
 
-        correct = response = correct_answer
+        correct = response == correct_answer
     except ValueError:
         correct = False
 
