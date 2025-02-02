@@ -139,6 +139,8 @@ def fatigue_test(): # Driver code
     else:
         print("You are alert and ready to study!")
 
+    print("\nHere is a graph that shows your fatigue score plotted based on the time of day: ")
+
 
 
     current_time = time.localtime()
@@ -147,14 +149,16 @@ def fatigue_test(): # Driver code
     minutes = current_time.tm_min
     decimal_time = hours + (minutes / 60)
 
-    # Print the result
-    print(f"Current time in decimal: {decimal_time:.2f}")
+    fatigue_point = (decimal_time, score)
 
+    coordinates = chart.load_coordinates()
+    coordinates = [fatigue_point]
 
-    fatigue_point = (decimal_time, score)  # Save timestamp and total score as a point
-    coordinates.append(fatigue_point)
+    chart.save_coordinates(coordinates)
 
-    chart.update_fatigue_chart(coordinates)  # Update chart with new data
+    chart.update_fatigue_chart(coordinates)
+
+    # Update chart with new data
 
 
 if __name__ == "__main__":
