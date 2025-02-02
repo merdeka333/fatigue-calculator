@@ -37,7 +37,8 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
 
     return correct, response_time  
 
-def fatigue_test():
+def fatigue_test(): # Driver code
+    # Explain the program to the user
     print("\nWelcome to the Fatigue Calculator for students.")
     time.sleep(3)
     print("Getting enough rest is super important for cognitive function, performance, and memory.")
