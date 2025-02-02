@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import json
 from matplotlib.animation import FuncAnimation
+import datetime
 
 DATA_FILE = "fatigue_data.json"  # File to store past fatigue test data
 
