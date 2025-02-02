@@ -2,6 +2,8 @@ import time
 import random
 import json
 import chart
+import sys
+import select
 
 coordinates = []
 
@@ -37,7 +39,8 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
 
     return correct, response_time  
 
-def fatigue_test():
+def fatigue_test(): # Driver code
+    # Explain the program to the user
     print("\nWelcome to the Fatigue Calculator for students.")
     time.sleep(3)
     print("Getting enough rest is super important for cognitive function, performance, and memory.")
@@ -107,6 +110,11 @@ def fatigue_test():
         time.sleep(3)
         print("Let's test your reaction speed.")
         print("When you see 'GO!', press Enter as fast as you can.")
+
+        # Clear any premature input before the reaction test starts
+        if select.select([sys.stdin], [], [], 0)[0]:
+            sys.stdin.read(1)  # Consume the premature input
+
         time.sleep(random.randint(2, 5))  # Random delay before showing GO!
         print("GO!")
         start_reaction = time.time()
