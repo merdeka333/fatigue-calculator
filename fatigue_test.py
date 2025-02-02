@@ -14,8 +14,13 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
     response_time = time.time() - start_time
 
     try:
-        response = answer_type(response)
-        correct = response == correct_answer
+        if answer_type == str:
+            response = response.lower() # Make response case-sensitive
+            correct_answer = correct_answer.lower()
+        else:
+            response = answer_type(response) # Convert input to specified type
+
+        correct = response = correct_answer
     except ValueError:
         correct = False
 
@@ -34,13 +39,13 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
 
 def fatigue_test():
     print("\nWelcome to the Fatigue Calculator for students.")
-    time.sleep(2)
+    time.sleep(3)
     print("Getting enough rest is super important for cognitive function, performance, and memory.")
-    time.sleep(2)
+    time.sleep(3)
     print("Even though you might be busy studying or doing homework, it's sometimes a better idea to take a break.")
-    time.sleep(2)
+    time.sleep(3)
     print("Let's determine your alertness level to see if it's time to relax!\n")
-    time.sleep(2)
+    time.sleep(3)
 
     score = 0
 
@@ -99,6 +104,7 @@ def fatigue_test():
         print(f"Your answer took {response_time:.2f} seconds.\n") # Print response time to 2 decimal places
 
         # Reaction speed test
+        time.sleep(3)
         print("Let's test your reaction speed.")
         print("When you see 'GO!', press Enter as fast as you can.")
         time.sleep(random.randint(2, 5))  # Random delay before showing GO!
