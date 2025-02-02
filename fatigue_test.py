@@ -33,7 +33,8 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
     return correct, response_time  
 
 def fatigue_test():
-    print("\nWelcome to the Fatigue Calculator! Let's determine your alertness level.\n")
+    print("\nWelcome to the Fatigue Calculator for students. \nGetting enough rest is super important for cognitive function, performance, and memory."
+          "\nEven though you might be busy studying or doing homework, it's sometimes a better idea to take a break. \nLet's determine your alertness level to see if it's time to relax!\n")
 
     score = 0
 
