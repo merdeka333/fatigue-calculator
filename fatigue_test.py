@@ -33,8 +33,13 @@ def ask_question(question, correct_answer, answer_type=str, time_limit=5):
     return correct, response_time  
 
 def fatigue_test():
-    print("\nWelcome to the Fatigue Calculator for students. \nGetting enough rest is super important for cognitive function, performance, and memory."
-          "\nEven though you might be busy studying or doing homework, it's sometimes a better idea to take a break. \nLet's determine your alertness level to see if it's time to relax!\n")
+    print("\nWelcome to the Fatigue Calculator for students.")
+    time.sleep(2)
+    print("Getting enough rest is super important for cognitive function, performance, and memory.")
+    time.sleep(2)
+    print("Even though you might be busy studying or doing homework, it's sometimes a better idea to take a break.")
+    time.sleep(2)
+    print("Let's determine your alertness level to see if it's time to relax!\n")
 
     score = 0
 
@@ -52,47 +57,65 @@ def fatigue_test():
     elif tiredness >= 3:
         score += 1
 
-    # Timed Questions
-    questions = [
+    # Question bank
+    question_bank = [
         ("What is 17 + 15?", 32, int),
-        ("What comes next in the pattern: 3, 6, 9, __?", 12, int),
-        ("What is 20 x 20?", 400, int)
+        ("What is 41 + 25", 66, int),
+        ("What comes next in the sequence: 3, 6, 9, __?", 12, int),
+        ("What comes next in the sequence: 11, 22, 33, __?", 44, int),
+        ("What comes next in the sequence: 2, 4, 8, __?", 16, int),
+        ("What is 3 x 8?", 24, int),
+        ("What is 6 x 7?", 42, int),
+        ("What is 36 divided by 4?", 9, int),
+        ("What is 7 squared?", 49, int),
+        ("What is 12 squared?", 144, int),
+        ("What is the capital of Canada?", "Ottawa", str),
+        ("What is the capital of France?", "Paris", str),
+        ("What is the main ingredient in guacamole?", "Avocado", str),
+        ("What do bees collect to make honey?", "Nectar", str),
+        ("Which word doesn't belong: Dolphin, Fish, Tiger, Octopus?", "Tiger", str),
+        ("If today is Saturday, what day was it three days ago?", "Wednesday", str)
     ]
 
-    for question, correct_answer, q_type in questions:
+    print("Answer these questions as fast as you can:")
+
+    num_questions = 3 # Number of questions to ask in each test
+    selected_questions = random.sample(question_bank, num_questions)
+
+    for question, correct_answer, q_type in selected_questions:
         correct, response_time = ask_question(question, correct_answer, q_type)
 
         if not correct:
             print("Incorrect answer!")
-            score += 3  # More fatigue points for incorrect answers
+            score += 3  # Incorrect answer adds 3 fatigue points
         else:
             print("Correct answer!")
             if response_time > 4:
-                score += 2  # Slow response increases fatigue
+                score += 2  # Slow response adds 2 fatigue points
             elif response_time > 2:
-                score += 1  # Moderate delay increases fatigue slightly
+                score += 1  # Moderate delay adds 1 fatigue point
 
-        print(f"Your answer took {response_time:.2f} seconds.\n")
+        print(f"Your answer took {response_time:.2f} seconds.\n") # Print response time to 2 decimal places
 
         # Reaction speed test
-        print("Now, let's test your reaction speed.")
+        print("Let's test your reaction speed.")
         print("When you see 'GO!', press Enter as fast as you can.")
-        time.sleep(random.randint(2, 5))  # Random delay before showing "GO!"
+        time.sleep(random.randint(2, 5))  # Random delay before showing GO!
         print("GO!")
         start_reaction = time.time()
         input()  # Wait for the user to press Enter
         reaction_time = time.time() - start_reaction
 
         if reaction_time > 2:
-            score += 3
+            score += 3 # Slow reaction time adds 3 fatigue points
         elif reaction_time > 1:
-            score += 2
+            score += 2 # Moderate reaction time adds 2 fatigue points
         elif reaction_time > 0.5:
-            score += 1
+            score += 1 # Fast reaction time adds 1 fatigue point
 
         print(f"Your reaction time was {reaction_time:.2f} seconds.\n")
 
-    # Final Fatigue Assessment
+    # Final fatigue assessment
     print("\nCalculating your overall fatigue level...")
     time.sleep(2)
     print(f"Your total fatigue score is: {score}")
@@ -100,7 +123,7 @@ def fatigue_test():
     if score >= 7:
         print("You are very tired. Stop studying and rest.")
     elif score >= 4:
-        print("You are moderately tired. Take a break soon.")
+        print("You are moderately tired. You might want to take a break soon.")
     else:
         print("You are alert and ready to study!")
 
