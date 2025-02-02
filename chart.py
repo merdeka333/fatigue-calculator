@@ -18,6 +18,13 @@ def save_coordinates(coordinates):
     with open(DATA_FILE, "w") as file:
         json.dump(coordinates, file)
 
+plt.ion()
+fig, ax = plt.subplots()
+ax.set_title("Fatigue Data")
+ax.set_xlabel("Response Time")
+ax.set_ylabel("Correctness (1: correct, 2: incorrect)")
+scatter = ax.scatter([], [], s=50, c='b', alpha=0.5)
+
 def plot_chart(coordinates):
     if not coordinates:
         print("No data to plot. Please complete the fatigue test first.")
@@ -27,25 +34,19 @@ def plot_chart(coordinates):
     xValue, yValue = zip(*coordinates)  # Unpacking the coordinates
 
     # Creating the figure and axes object
-    fig, ax = plt.subplots()
-    ax.set_title("Fatigue Data")
-    ax.set_xlabel("Response Time")
-    ax.set_ylabel("Correctness (1: correct, 2: incorrect)")
-    ax.set_xlim(0, max(xValue) + 1)  # Set x-axis limits dynamically
+    ax.set_xlim(0, max(xValue) + 1)
     ax.set_ylim(0.5, 2.5)
 
-    scatter = ax.scatter([], [], s=50, c='b', alpha=0.5)
+    scatter.set_offsets(np.column_stack((xValue, yValue)))  # Update points
+    plt.draw()  # Redraw the figure
+    plt.pause(0.1)
 
-    # Update function to update data and plot
-    def update(frame):
-        # Updating the data by adding more points
-        x = np.array(xValue[:frame + 1])
-        y = np.array(yValue[:frame + 1])
-        scatter.set_offsets(np.column_stack((x, y)))
-        return scatter,
-
-    anim = FuncAnimation(fig, update, frames=len(coordinates), interval=500, repeat=False)  # Smooth animation
-    plt.show()
+def update_fatigue_chart(new_data):
+    """Add new fatigue test data and update the chart."""
+    coordinates = load_coordinates()  # Load past data
+    coordinates.extend(new_data)  # Add new points
+    save_coordinates(coordinates)  # Save updated data
+    plot_chart(coordinates)  # Plot updated data
 
 
 
