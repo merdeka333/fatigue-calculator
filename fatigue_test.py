@@ -40,6 +40,7 @@ def fatigue_test():
     print("Even though you might be busy studying or doing homework, it's sometimes a better idea to take a break.")
     time.sleep(2)
     print("Let's determine your alertness level to see if it's time to relax!\n")
+    time.sleep(2)
 
     score = 0
 
@@ -77,7 +78,7 @@ def fatigue_test():
         ("If today is Saturday, what day was it three days ago?", "Wednesday", str)
     ]
 
-    print("Answer these questions as fast as you can:")
+    print("Answer these questions as fast as you can:\n")
 
     num_questions = 3 # Number of questions to ask in each test
     selected_questions = random.sample(question_bank, num_questions)
@@ -120,9 +121,9 @@ def fatigue_test():
     time.sleep(2)
     print(f"Your total fatigue score is: {score}")
 
-    if score >= 7:
+    if score >= 8:
         print("You are very tired. Stop studying and rest.")
-    elif score >= 4:
+    elif score >= 5:
         print("You are moderately tired. You might want to take a break soon.")
     else:
         print("You are alert and ready to study!")
